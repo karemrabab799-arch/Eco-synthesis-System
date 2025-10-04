@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-Synthesis: Martian Waste Synthesis Prototype</title>
+    <!-- Load Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mars-red': '#C94C38', // Deep Martian Red
+                        'dark-bg': '#000000', // Very dark background
+                        'accent-blue': '', // Blue for lighting effects/accents
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        /* Futuristic button design */
+        .futuristic-btn {
+            box-shadow: 0 0 10px rgba(201, 76, 56, 0.5); /* Soft red glow */
+            transition: all 0.2s ease-in-out;
+        }
+        .futuristic-btn:hover {
+            box-shadow: 0 0 15px rgba(201, 76, 56, 0.8), 0 0 5px rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        /* Progress bar transition */
+        #progressBar {
+            transition: width 0.5s ease;
+        }
+        /* Dark, mysterious panel aesthetic */
+        .dark-panel {
+            border: 1px solid #3b1e20;
+            background-color:#3b201e;
+        }
+        .inner-panel{
+       border:1px solid #111;
+       background-color: #000;
+
+        }
+        /* Fade-in effect for the final message */
+        .success-message {
+            animation: fadeIn 1s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+         .back-home-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      background-color:  rgba(255, 0, 0, 0.903);
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      z-index: 1000;
+      transition: 0.3s, transform 0.2s;
+    }
+
+  
+  .back-home-btn:hover {
+      background-color: #f7efe5 ;
+      color: rgb(255, 0, 0);
+      transform: translateY(-2px);
+    }
+
+    </style>
+</head>
+<body class="bg-dark-bg text-gray-100 font-sans min-h-screen flex items-center justify-center p-4">
+
+ <a href="mars.html" class="back-home-btn">Back</a>
+    <!-- Main Application Container -->
+    <div id="app-container" class="w-full max-w-lg mx-auto dark-panel rounded-xl shadow-2xl p-6 md:p-8">
+
+        <!-- Header and Project Information -->
+        <header class="text-center mb-6 border-b border-gray-700 pb-4">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-mars-red tracking-wide">Eco-Synthesis System</h1>
+            <p class="text-gray-400 mt-1 text-sm md:text-base">Martian Waste Resource Utilization Unit (ISRU Focus)</p>
+        </header>
+
+        <!-- Simulation Area (Interactive Screen) -->
+        <div id="simulation-screen" class=" rounded-lg p-5 dark-pannel  border-2 border-mars-red/50 min-h-[300px] flex flex-col justify-center items-center text-center ">
+            
+            <!-- Status Message Bar -->
+            <div id="status-message" class="text-xl font-semibold mb-4 text-accent-blue"></div>
+            
+            <!-- Content Area changes based on the phase -->
+            <div id="content-area" class="w-full">
+                <!-- Initial Welcome Screen -->
+                <div id="start-screen">
+                    <p class="text-gray-300 mb-6 text-lg">The **Eco-Synthesis** system is ready for operation. Please initialize the waste processing cycle.</p>
+                    <button onclick="startSynthesis()" class="futuristic-btn bg-mars-red hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg transition duration-200">
+                        Initiate Cycle
+                    </button>
+                </div>
+
+                <!-- Sorting Screen (Phase 1) -->
+                <div id="sorting-screen" class="hidden">
+                    <p class="text-lg mb-4 text-gray-300 font-medium">Phase 1: Smart Sorting Input</p>
+                    <div class="grid grid-cols-3 gap-3">
+                        <!-- Hard Plastics -->
+                        <button onclick="selectWaste('Plastic')" class="futuristic-btn bg-gray-700 hover:bg-gray-600 text-white p-3 rounded-lg text-sm transition duration-200">
+                            <span class="text-2xl block mb-1">📦</span> Hard Plastics
+                        </button>
+                        <!-- Fabrics/Fibers -->
+                        <button onclick="selectWaste('Fabric')" class="futuristic-btn bg-gray-700 hover:bg-gray-600 text-white p-3 rounded-lg text-sm transition duration-200">
+                            <span class="text-2xl block mb-1">🧵</span> Fabrics / Fibers
+                        </button>
+                        <!-- Light Metals -->
+                        <button onclick="selectWaste('Metal')" class="futuristic-btn bg-gray-700 hover:bg-gray-600 text-white p-3 rounded-lg text-sm transition duration-200">
+                            <span class="text-2xl block mb-1">🔩</span> Light Metals
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Synthesis Screen (Phase 2 - Progress Bar) -->
+                <div id="synthesis-screen" class="hidden w-full">
+                    <p class="text-lg mb-4 text-gray-300 font-medium">Phase 2: Thermo-Chemical Synthesis</p>
+                    <div class="w-full bg-gray-700 rounded-full h-4">
+                        <div id="progressBar" class="bg-mars-red h-4 rounded-full" style="width: 0%"></div>
+                    </div>
+                    <p id="synthesis-step" class="mt-2 text-sm text-gray-400">Loading Martian Regolith...</p>
+                </div>
+                
+                <!-- Completion Screen (Phase 3 - Fabrication Ready) -->
+                <div id="completion-screen" class="hidden success-message">
+                    <div class="text-5xl mb-4 text-green-400">✅</div>
+                    <h2 class="text-2xl font-bold text-mars-red mb-3">Trans-Regolith Ready!</h2>
+                    <p class="text-gray-300 text-lg">Phase 3: Material prepared for Additive Manufacturing (3D Printing).</p>
+                    <button onclick="initApp()" class="mt-6 text-sm text-gray-400 hover:text-mars-red transition duration-200">
+                        Start New Cycle
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="text-center mt-6 text-sm text-gray-500">
+            <p>Team **The Martian Phoenix** | Project: Eco-Synthesis System | NASA Space Apps Challenge</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // State variables
+        let currentPhase = 'start';
+        let simulationInterval;
+        let progressBarValue = 0;
+
+        const statusMessage = document.getElementById('status-message');
+        const startScreen = document.getElementById('start-screen');
+        const sortingScreen = document.getElementById('sorting-screen');
+        const synthesisScreen = document.getElementById('synthesis-screen');
+        const completionScreen = document.getElementById('completion-screen');
+        const progressBar = document.getElementById('progressBar');
+        const synthesisStep = document.getElementById('synthesis-step');
+
+        /**
+         * Initializes the application and shows the welcome screen.
+         */
+        function initApp() {
+            currentPhase = 'start';
+            // Hide all screens except start
+            startScreen.classList.remove('hidden');
+            sortingScreen.classList.add('hidden');
+            synthesisScreen.classList.add('hidden');
+            completionScreen.classList.add('hidden');
+            statusMessage.textContent = 'Eco-Synthesis System Online';
+            progressBarValue = 0;
+            progressBar.style.width = '0%';
+            synthesisStep.textContent = 'Loading Martian Regolith...';
+        }
+
+        /**
+         * Transitions from the start screen to the sorting phase.
+         */
+        function startSynthesis() {
+            currentPhase = 'sorting';
+            startScreen.classList.add('hidden');
+            sortingScreen.classList.remove('hidden');
+            statusMessage.textContent = 'Waiting for Waste Input';
+        }
+
+        /**
+         * Processes the sorting decision and initiates the synthesis simulation.
+         * @param {string} wasteType - The selected waste type (Plastic, Fabric, Metal).
+         */
+        function selectWaste(wasteType) {
+            currentPhase = 'synthesis_prep';
+            sortingScreen.classList.add('hidden');
+            synthesisScreen.classList.remove('hidden');
+            
+            let processMessage = '';
+
+            // Apply Sorting Logic
+            switch (wasteType) {
+                case 'Plastic':
+                    processMessage = 'Material Identified: Hard Polymer. Routing to **High-Pressure Synthesis Chamber**.';
+                    break;
+                case 'Fabric':
+                    processMessage = 'Material Identified: Fibrous Textile. Routing to **Shredding & Polymer Mixing Unit**.';
+                    break;
+                case 'Metal':
+                    processMessage = 'Material Identified: Light Foil. Routing to **Magnetic Separation Bay**.';
+                    break;
+                default:
+                    processMessage = 'Material Identified. Initiating Synthesis Phase...';
+                    break;
+            }
+
+            statusMessage.textContent = processMessage;
+
+            // Start synthesis simulation after a brief delay to read the sorting message
+            setTimeout(simulateSynthesis, 1500); 
+        }
+
+        /**
+         * Simulates the synthesis progress bar.
+         */
+        function simulateSynthesis() {
+            currentPhase = 'synthesis_running';
+            clearInterval(simulationInterval);
+            
+            simulationInterval = setInterval(() => {
+                if (progressBarValue >= 100) {
+                    clearInterval(simulationInterval);
+                    synthesisCompleted();
+                    return;
+                }
+
+                // Increment progress bar value
+                progressBarValue += 10;
+                if (progressBarValue > 100) progressBarValue = 100;
+                
+                progressBar.style.width = `${progressBarValue}%`;
+                
+                // Update synthesis step messages
+                if (progressBarValue <= 30) {
+                    synthesisStep.textContent = '30% Regolith Integration Complete...';
+                } else if (progressBarValue <= 70) {
+                    synthesisStep.textContent = 'Thermo-Chemical Reaction in Progress...';
+                } else if (progressBarValue <= 90) {
+                    synthesisStep.textContent = 'Composite Material Entering Final Cooling Stage...';
+                }
+                
+                statusMessage.textContent = `Phase 2: Synthesis (${progressBarValue}%)`;
+
+            }, 300); // Simulation speed: 300ms per step (Total ~3 seconds)
+        }
+
+        /**
+         * Final completion state.
+         */
+        function synthesisCompleted() {
+            currentPhase = 'complete';
+            synthesisScreen.classList.add('hidden');
+            completionScreen.classList.remove('hidden');
+            statusMessage.textContent = 'SUCCESS: Trans-Regolith Ready for Fabrication!';
+        }
+
+        // Run the application on load
+        window.onload = initApp;
+
+    </script>
+</body>
+</html>
+

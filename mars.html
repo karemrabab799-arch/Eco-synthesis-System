@@ -1,0 +1,362 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mars Waste Recycling System</title>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- AOS Animation -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        background: url(photo_2025-10-03_10-18-47.jpg) no-repeat center center fixed;
+        background-size: cover;
+        color: #fff;
+        position: relative;
+    }
+
+    body:before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, black, black);
+        z-index: -1;
+    }
+
+    .mars-bg {
+        background: linear-gradient(135deg, gray, black, gray);
+        border: 2px solid black;
+    }
+
+    .stage-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 2px solid black;
+        overflow: hidden;
+        background: gray !important;
+    }
+
+    .stage-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px black;
+        border-color: black;
+    }
+
+    .nav-tabs .nav-link {
+        border: 2px solid black;
+        border-radius: 50px;
+        margin: 0 10px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        background: gray;
+        color: black;
+    }
+
+    .nav-tabs .nav-link.active {
+        background: #ff0000;
+        color: #000;
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(255, 213, 0, 0.7);
+    }
+
+    .nav-tabs .nav-link:hover:not(.active) {
+        background: black;
+        color: white;
+    }
+
+    @keyframes floatAnimation {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    .floating {
+        animation: floatAnimation 3s ease-in-out infinite;
+    }
+
+    .section-title {
+        position: relative;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+    }
+
+    .section-title:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 3px;
+        background: gray;
+    }
+        .back-home-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      background-color:  rgb(255, 0, 0);
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      z-index: 1000;
+      transition: 0.3s, transform 0.2s;
+    }
+
+  
+  .back-home-btn:hover {
+      background-color: white ;
+      color: rgb(255, 0, 0);
+      transform: translateY(-2px);
+    }
+
+    
+</style>
+</head>
+
+<body> 
+    <a href="Eco-Synthesis System.html" class="back-home-btn">Next</a>
+
+    <!-- Main Content -->
+    <div class="container-fluid py-5">
+        <!-- Hero Section -->
+        <div class="container text-center py-5" data-aos="fade-down">
+            <h1 class="display-4 fw-bold text-danger mb-4">Eco-Synthesis System</h1>
+            <p class="lead text-danger fs-4 mb-5">Sustainable resource management and human life support on the Red
+                Planet through advanced recycling technologies</p>
+        </div>
+        <!-- Mars Image -->
+        <div class="container mb-5" data-aos="zoom-in">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="rounded-4 overflow-hidden shadow-lg border-4 border-warning floating">
+                        <img src="photo_2025-10-03_22-06-30.jpg"
+                            alt="Mars planet with distinctive surface features, craters, and orange dusty atmosphere"
+                            class="img-fluid w-100">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Stages Navigation -->
+        <div class="container mb-5" data-aos="fade-up">
+            <ul class="nav nav-tabs justify-content-center flex-nowrap overflow-auto py-3" id="stagesTab"
+                role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="sorting-tab" data-bs-toggle="tab" data-bs-target="#sorting"
+                        type="button" role="tab">
+                        <i class="fas fa-sort me-2"></i>Sorting
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="synthesis-tab" data-bs-toggle="tab" data-bs-target="#synthesis"
+                        type="button" role="tab">
+                        <i class="fas fa-flask me-2"></i>Synthesis
+                    </button>
+                </li>
+                <button class="nav-link" id="fabrication-tab" data-bs-toggle="tab" data-bs-target="#fabrication"
+                    type="button" role="tab">
+                    <i class="fas fa-cogs me-2"></i>Fabrication
+                </button>
+                </li>
+            </ul>
+        </div>
+        <!-- Stages Content -->
+        <div class="container mb-5">
+            <div class="tab-content" id="stagesTabContent">
+                <!-- Sorting Stage -->
+                <div class="tab-pane fade show active" id="sorting" role="tabpanel">
+                    <div class="row align-items-center" data-aos="fade-right">
+                        <div class="col-md-6">
+                            <h2 class="fw-bold text-danger mb-4 section-title"> Smart Sorting and PrecisionRouting
+                                (Detection)</h2>
+                            <p class="text-danger fs-5 mb-4">
+                                This phase ensures zero cross-contamination. A High-Resolution Spectrometer instantly
+                                analyzes the chemical composition of the incoming mission waste (polymers, fabrics,
+                                light metals). Based on the analysis, a precision robotic arm directs the material to
+                                its corresponding pre-processing channel (e.g., thermal decomposition for plastics or
+                                shredding for fibers). This step is vital for optimizing the material for the subsequent
+                                chemical bond
+                            </p>
+                            <div class="bg-light bg-opacity-25 p-4 rounded-3 border-start border-4 border-light">
+                                <h4 class="fw-semibold text-dark mb-3"><i class="fas fa-star me-2"></i>Stage Features:
+                                </h4>
+                                <ul class="list-unstyled text-dark">
+                                    <li class="mb-2"><i class="fas fa-robot me-2"></i>Operates autonomously using AI
+                                        systems</li>
+                                    <li class="mb-2"><i class="fas fa-planet me-2"></i>Designed for Mars' low-gravity
+                                        conditions</li>
+                                    <li class="mb-2"><i class="fas fa-sun me-2"></i>Powered by abundant solar energy
+                                    </li>
+                                    <li class="mb-2"><i class="fas fa-earth-americas me-2"></i>Reduces dependence on
+                                        Earth supplies</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6" data-aos="zoom-in">
+                            <div class="rounded-4 overflow-hidden shadow-lg">
+                                <img src="photo_2025-10-03_14-38-42.jpg"
+                                    alt="Advanced robotic sorting system on Mars with different waste materials and robotic arms"
+                                    class="img-fluid w-100">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Synthesis Stage -->
+                <div class="tab-pane fade" id="synthesis" role="tabpanel">
+                    <div class="row align-items-center" data-aos="fade-left">
+                        <div class="col-md-6 order-md-2">
+                            <h2 class="fw-bold text-danger mb-4 section-title"> Thermo-Chemical Synthesis(Processing)
+                            </h2>
+                            <p class="text-danger fs-5 mb-4">
+                                This is the core ISRU function. The pre-processed waste is combined with a measured
+                                amount of Martian Regolith (filtered Martian soil) inside the central chamber. The unit
+                                then applies High Thermal Energy and Pressure (HTP) to force a chemical bond between the
+                                waste residue and the Regolith's iron-oxide compounds. This process creates a single,
+                                structurally homogenous composite material: Trans-Regolith.
+                            </p>
+                            <div class="bg-light bg-opacity-25 p-4 rounded-3 border-start border-4 border-light">
+                                <h4 class="fw-semibold text-dark mb-3"><i class="fas fa-star me-2"></i>Stage Features:
+                                </h4>
+                                <ul class="list-unstyled text-dark">
+                                    <li class="mb-2"><i class="fas fa-microscope me-2"></i>Advanced chemical processing
+                                        systems</li>
+                                    <li class="mb-2"><i class="fas fa-temperature-low me-2"></i>Optimized for thin
+                                        atmosphere conditions</li>
+                                    <li class="mb-2"><i class="fas fa-solar-panel me-2"></i>Solar-powered energy
+                                        efficient design</li>
+                                    <li class="mb-2"><i class="fas fa-recycle me-2"></i>Closed-loop resource utilization
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 order-md-1" data-aos="zoom-in">
+                            <div class="rounded-4 overflow-hidden shadow-lg">
+                                <img src="photo_2025-10-03_15-56-23.jpg"
+                                    alt="Chemical synthesis laboratory on Mars with advanced equipment"
+                                    class="img-fluid w-100">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fabrication Stage -->
+                <div class="tab-pane fade" id="fabrication" role="tabpanel">
+                    <div class="row align-items-center" data-aos="fade-right">
+                        <div class="col-md-6">
+                            <h2 class="fw-bold text-danger mb-4 section-title">Extrusion and Fabrication prep(Output)
+                            </h2>
+                            <p class="text-danger fs-5 mb-4">
+                                The final stage prepares the new resource for the crew. The cooled Trans-Regolith
+                                Composite is channeled into a precision extrusion unit. The unit draws and spools the
+                                material into standardized, robust 3D Printing Filament. This finished filament is
+                                immediately ready for Additive Manufacturing (3D printing) of tools, spares, and habitat
+                                components, effectively closing the mission's resource loop and ensuring
+                                self-sufficiency.
+                            </p>
+                            <div class="bg-light bg-opacity-25 p-4 rounded-3 border-start border-4 border-light">
+                                <h4 class="fw-semibold text-dark mb-3"><i class="fas fa-star me-2"></i>Stage Features:
+                                </h4>
+                                <ul class="list-unstyled text-dark">
+                                    <li class="mb-2"><i class="fas fa-print me-2"></i>Advanced 3D printing capabilities
+                                    </li>
+                                    <li class="mb-2"><i class="fas fa-tools me-2"></i>Tools and parts manufacturing</li>
+                                    <li class="mb-2"><i class="fas fa-building me-2"></i>Construction materials
+                                        production</li>
+                                    <li class="mb-2"><i class="fas fa-industry me-2"></i>Local resource independence
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6" data-aos="zoom-in">
+                            <div class="rounded-4 overflow-hidden shadow-lg">
+                                <img src="photo_2025-10-03_15-56-19.jpg"
+                                    alt="3D printing fabrication facility on Mars creating tools from recycled materials"
+                                    class="img-fluid w-100">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- All Stages Overview -->
+        <div class="container-fluid mars-bg text-white py-5" data-aos="fade-up">
+            <div class="container">
+                <h2 class="text-center fw-bold mb-5 section-title">Recycling Stages Overview</h2>
+                <div class="row">
+                    <!-- Sorting Card -->
+                    <div class="col-md-4 mb-4" data-aos="flip-left" data-aos-delay="100">
+                        <div class="stage-card text-center p-4 rounded-4 bg-dark bg-opacity-75 h-100">
+                            <div class="mb-3">
+                                <i class="fas fa-sort fa-3x text-warning"></i>
+                            </div>
+                            <h3 class="fw-semibold mb-3">Sorting</h3>
+                            <p class="text-light">Initial waste separation stage using advanced robotic systems and
+                                sensors designed for Martian conditions.</p>
+                        </div>
+                    </div>
+                    <!-- Synthesis Card -->
+                    <div class="col-md-4 mb-4" data-aos="flip-left" data-aos-delay="200">
+                        <div class="stage-card text-center p-4 rounded-4 bg-dark bg-opacity-75 h-100">
+                            <div class="mb-3">
+                                <i class="fas fa-flask fa-3x text-warning"></i>
+                            </div>
+                            <h3 class="fw-semibold mb-3">Synthesis</h3>
+                            <p class="text-light">Transformation of waste into usable raw materials through advanced
+                                biochemical processes adapted for Mars.</p>
+                        </div>
+                    </div>
+                    <!-- Fabrication Card -->
+                    <div class="col-md-4 mb-4" data-aos="flip-left" data-aos-delay="300">
+                        <div class="stage-card text-center p-4 rounded-4 bg-dark bg-opacity-75 h-100">
+                            <div class="mb-3">
+                                <i class="fas fa-cogs fa-3x text-warning"></i>
+                            </div>
+                            <h3 class="fw-semibold mb-3">Fabrication</h3>
+                            <p class="text-light">Manufacturing of essential products using recycled materials with
+                                advanced 3D printing technologies.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS animation
+        document.addEventListener('DOMContentLoaded', function () {
+            AOS.init({
+                duration: 1000,
+                once: true,
+                easing: 'ease-in-out'
+            });
+            // Add animation to tab changes
+            const tabLinks = document.querySelectorAll('[data-bs-toggle="tab"]');
+            tabLinks.forEach(link => {
+                link.addEventListener('shown.bs.tab', function (e) {
+                    const targetContent = document.querySelector(e.target.getAttribute('data-bs-target'));
+                    const elements = targetContent.querySelectorAll('[data-aos]');
+                    elements.forEach(el => {
+                        el.classList.remove('aos-animate');
+                        setTimeout(() => {
+                            AOS.refreshHard();
+                        }, 50);
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
